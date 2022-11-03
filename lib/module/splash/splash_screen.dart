@@ -47,6 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
                     },
                     minWidth: double.infinity,
+                    height: 50,
                     color: Colors.white,
                     child: Text(
                       "Sign up",
@@ -56,11 +57,15 @@ class _SplashScreenState extends State<SplashScreen> {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   MaterialButton(
                     onPressed: () {
 
                     },
                     minWidth: double.infinity,
+                    height: 50,
                     color: Colors.black,
                     child: Text(
                       "Login",
