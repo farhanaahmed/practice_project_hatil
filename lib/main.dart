@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Hatil',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.black,
       ),
       home: SplashScreen(),
     );
