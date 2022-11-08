@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:practice_project_hatil/module/home/home_screen.dart';
 import 'package:practice_project_hatil/module/splash/splash_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -95,7 +97,35 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 100,
             ),
             MaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                // print(_emailController.text);
+                // print(_passwordController.text);
+                FocusManager.instance.primaryFocus?.unfocus();
+                if (_emailController.text == _email &&
+                    _passwordController.text == _password) {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(),
+                    ),
+                    (route) => false,
+                  );
+                  //   //       Widget goToHome(BuildContext context) {
+                  //   // return HomeScreen();
+                  //   // }
+                } else {
+                  //print("Invalid email or password!");
+                  Fluttertoast.showToast(
+                    msg: "Invalid email or password!",
+                    toastLength: Toast.LENGTH_SHORT,
+                    // gravity: ToastGravity.CENTER,
+                    // timeInSecForIosWeb: 1,
+                    // backgroundColor: Colors.red,
+                    // textColor: Colors.white,
+                    // fontSize: 16.0
+                  );
+                }
+              },
               minWidth: double.infinity,
               height: 40,
               color: Colors.black,
