@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:practice_project_hatil/module/auth/login/controller/login_controller.dart';
 import 'package:practice_project_hatil/module/auth/password_reset/forgot_password_screen.dart';
 import 'package:practice_project_hatil/module/auth/sign_up/sign_up_screen.dart';
 import 'package:practice_project_hatil/module/home/home_screen.dart';
@@ -17,8 +18,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final String _email = "fima123@gmail.com";
-  final String _password = "123456@@@";
+  final LoginController _loginController = LoginController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,31 +100,21 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             MaterialButton(
               onPressed: () {
-                // print(_emailController.text);
-                // print(_passwordController.text);
                 FocusManager.instance.primaryFocus?.unfocus();
-                if (_emailController.text == _email &&
-                    _passwordController.text == _password) {
+                final isLoggedIn = _loginController.login(_emailController.text,
+                    _passwordController.text);
+                if(isLoggedIn){
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
                       builder: (context) => HomeScreen(),
                     ),
-                    (route) => false,
+                        (route) => false,
                   );
-                  //   //       Widget goToHome(BuildContext context) {
-                  //   // return HomeScreen();
-                  //   // }
-                } else {
-                  //print("Invalid email or password!");
+                }else{
                   Fluttertoast.showToast(
                     msg: "Invalid email or password!",
                     toastLength: Toast.LENGTH_SHORT,
-                    // gravity: ToastGravity.CENTER,
-                    // timeInSecForIosWeb: 1,
-                    // backgroundColor: Colors.red,
-                    // textColor: Colors.white,
-                    // fontSize: 16.0
                   );
                 }
               },

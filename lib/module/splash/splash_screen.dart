@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practice_project_hatil/module/auth/login/login_screen.dart';
+import 'package:practice_project_hatil/module/auth/login/ui/login_screen.dart';
 import 'package:practice_project_hatil/module/auth/sign_up/sign_up_screen.dart';
 
 class SplashScreen extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practice_project_hatil/module/auth/login/login_screen.dart';
+import 'package:practice_project_hatil/module/auth/login/ui/login_screen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
