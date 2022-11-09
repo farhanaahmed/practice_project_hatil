@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:practice_project_hatil/module/auth/password_reset/forgot_password_screen.dart';
+import 'package:practice_project_hatil/module/auth/sign_up/sign_up_screen.dart';
 import 'package:practice_project_hatil/module/home/home_screen.dart';
 import 'package:practice_project_hatil/module/splash/splash_screen.dart';
 
@@ -142,11 +144,21 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 30,
             ),
             Center(
-              child: Text(
-                "Forgot your password?",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ForgotPasswordScreen(),
+                    ),
+                  );
+                },
+                child: Text(
+                  "Forgot your password?",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ),
@@ -195,7 +207,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          print('Sign Up clicked');
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SignUpScreen(),
+                            ),
+                          );
                         },
                     ),
                   ],
