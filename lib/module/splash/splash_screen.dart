@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practice_project_hatil/module/auth/login/login_screen.dart';
+import 'package:practice_project_hatil/module/auth/sign_up/sign_up_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -45,7 +46,12 @@ class _SplashScreenState extends State<SplashScreen> {
                   Spacer(),
                   MaterialButton(
                     onPressed: () {
-
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignUpScreen(),
+                        ),
+                      );
                     },
                     minWidth: double.infinity,
                     height: 50,
@@ -63,8 +69,12 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                   MaterialButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)
-                      => LoginScreen()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginScreen(),
+                        ),
+                      );
                     },
                     minWidth: double.infinity,
                     height: 50,
