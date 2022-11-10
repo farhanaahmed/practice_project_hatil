@@ -1,6 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:practice_project_hatil/module/auth/login/ui/login_screen.dart';
+import 'package:practice_project_hatil/module/auth/sign_up/controller/sign_up_controller.dart';
+import 'package:practice_project_hatil/module/auth/sign_up/data/model/sign_up_request.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -15,6 +18,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _dateOfBirthController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
+  final SignUpController _signUpController = SignUpController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,7 +165,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 50,
             ),
             MaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                FocusManager.instance.primaryFocus?.unfocus();
+                final SignUpRequest signUpRequest = SignUpRequest(
+                  _emailController.text,
+                  _passwordController.text,
+                  _phoneController.text,
+                  _dateOfBirthController.text,
+                  _addressController.text,
+                );
+                final isSignedUp = _signUpController.signUp(signUpRequest);
+                if (isSignedUp) {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ),
+                      (route) => false);
+                } else {
+                  Fluttertoast.showToast(
+                    msg: "Sign Up Failed! Try Again..",
+                    toastLength: Toast.LENGTH_SHORT,
+                  );
+                }
+              },
               minWidth: double.infinity,
               height: 50,
               color: Colors.black,
