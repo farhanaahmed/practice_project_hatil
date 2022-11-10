@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:practice_project_hatil/module/auth/login/controller/login_controller.dart';
+import 'package:practice_project_hatil/module/auth/login/data/model/login_request.dart';
 import 'package:practice_project_hatil/module/auth/password_reset/forgot_password_screen.dart';
 import 'package:practice_project_hatil/module/auth/sign_up/sign_up_screen.dart';
 import 'package:practice_project_hatil/module/home/home_screen.dart';
@@ -101,8 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
             MaterialButton(
               onPressed: () {
                 FocusManager.instance.primaryFocus?.unfocus();
-                final isLoggedIn = _loginController.login(_emailController.text,
+                final LoginRequest loginRequest = LoginRequest(_emailController.text,
                     _passwordController.text);
+                final isLoggedIn = _loginController.login(loginRequest);
                 if(isLoggedIn){
                   Navigator.pushAndRemoveUntil(
                     context,
