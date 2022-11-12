@@ -16,6 +16,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final ForgotPasswordController _forgotPasswordController =
   ForgotPasswordController();
 
+  bool _isEmailSent = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,70 +52,84 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             SizedBox(
               height: 30,
             ),
-            Text(
-              "Please enter your email address.You will receive a link to "
-                  "create a new password via email.",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            TextField(
-              controller: _emailController,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: Colors.grey),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: Colors.grey),
-                ),
-                labelText: "Email",
-                labelStyle: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-                hintText: "Enter your email",
-              ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            MaterialButton(
-              onPressed: () {
-                FocusManager.instance.primaryFocus?.unfocus();
-                final ForgotPasswordRequest forgotPasswordRequest = ForgotPasswordRequest(_emailController.text);
-                final isForgotPassword = _forgotPasswordController
-                    .forgotPassword(forgotPasswordRequest);
-                if(isForgotPassword){
-
-                }
-                else{
-                  Fluttertoast.showToast(
-                    msg: "Invalid email!",
-                    toastLength: Toast.LENGTH_SHORT,
-                  );
-                }
-              },
-              minWidth: double.infinity,
-              height: 50,
-              color: Colors.black,
-              child: Text(
-                "SEND",
-                style: TextStyle(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+            _isEmailSent ? Text("Email sent.Please try to login "
+                "again.") : _getBody(),
           ],
         ),
       ),
     );
   }
+
+  Widget _getBody(){
+    return Column(
+      children: [
+        Text(
+          "Please enter your email address.You will receive a link to "
+              "create a new password via email.",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        SizedBox(
+          height: 50,
+        ),
+        TextField(
+          controller: _emailController,
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(width: 2, color: Colors.grey),
+            ),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(width: 2, color: Colors.grey),
+            ),
+            labelText: "Email",
+            labelStyle: TextStyle(
+              color: Colors.grey,
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+            hintText: "Enter your email",
+          ),
+        ),
+        SizedBox(
+          height: 50,
+        ),
+        MaterialButton(
+          onPressed: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+            final ForgotPasswordRequest forgotPasswordRequest = ForgotPasswordRequest(_emailController.text);
+            final isForgotPassword = _forgotPasswordController
+                .forgotPassword(forgotPasswordRequest);
+            if(isForgotPassword){
+              setState(() {
+                _isEmailSent = true;
+              });
+            }
+            else{
+              Fluttertoast.showToast(
+                msg: "Invalid email!",
+                toastLength: Toast.LENGTH_SHORT,
+              );
+            }
+          },
+          minWidth: double.infinity,
+          height: 50,
+          color: Colors.black,
+          child: Text(
+            "SEND",
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              fontSize: 16,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
 }
+
+
