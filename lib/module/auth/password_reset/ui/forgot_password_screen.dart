@@ -16,8 +16,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final ForgotPasswordController _forgotPasswordController =
   ForgotPasswordController();
 
-  bool _isEmailSent = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,8 +50,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             SizedBox(
               height: 30,
             ),
-            _isEmailSent ? Text("Email sent.Please try to login "
-                "again.") : _getBody(),
+            StreamBuilder<bool>(
+              stream: _forgotPasswordController.isEmailSentSubject.stream,
+              builder: (context, snapshot) {
+                if(snapshot.data!){
+                  return _getSuccessBody();
+                }else{
+                  return _getBody();
+                }
+              },
+            ),
           ],
         ),
       ),
@@ -74,25 +80,31 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         SizedBox(
           height: 50,
         ),
-        TextField(
-          controller: _emailController,
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(width: 2, color: Colors.grey),
-            ),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(width: 2, color: Colors.grey),
-            ),
-            labelText: "Email",
-            labelStyle: TextStyle(
-              color: Colors.grey,
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-            ),
-            hintText: "Enter your email",
-          ),
-        ),
+       StreamBuilder<String?>(
+         stream: _forgotPasswordController.emailErrorMsgSubject.stream,
+         builder: (context, snapshot){
+           return  TextField(
+             controller: _emailController,
+             keyboardType: TextInputType.emailAddress,
+             decoration: InputDecoration(
+               errorText: snapshot.data,
+               focusedBorder: UnderlineInputBorder(
+                 borderSide: BorderSide(width: 2, color: Colors.grey),
+               ),
+               enabledBorder: UnderlineInputBorder(
+                 borderSide: BorderSide(width: 2, color: Colors.grey),
+               ),
+               labelText: "Email",
+               labelStyle: TextStyle(
+                 color: Colors.grey,
+                 fontSize: 18,
+                 fontWeight: FontWeight.w500,
+               ),
+               hintText: "Enter your email",
+             ),
+           );
+         },
+       ),
         SizedBox(
           height: 50,
         ),
@@ -100,19 +112,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           onPressed: () {
             FocusManager.instance.primaryFocus?.unfocus();
             final ForgotPasswordRequest forgotPasswordRequest = ForgotPasswordRequest(_emailController.text);
-            final isForgotPassword = _forgotPasswordController
-                .forgotPassword(forgotPasswordRequest);
-            if(isForgotPassword){
-              setState(() {
-                _isEmailSent = true;
-              });
-            }
-            else{
-              Fluttertoast.showToast(
-                msg: "Invalid email!",
-                toastLength: Toast.LENGTH_SHORT,
-              );
-            }
+            _forgotPasswordController.forgotPassword(forgotPasswordRequest);
           },
           minWidth: double.infinity,
           height: 50,
@@ -128,6 +128,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ),
       ],
     );
+  }
+
+  Widget _getSuccessBody(){
+    return Text("Email sent.Please try to login "
+        "again.");
   }
 
 }
