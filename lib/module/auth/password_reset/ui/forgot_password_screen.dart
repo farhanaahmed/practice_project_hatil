@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:practice_project_hatil/module/auth/login/ui/login_screen.dart';
+import 'package:practice_project_hatil/module/auth/password_reset/controller/forgot_password_controller.dart';
+import 'package:practice_project_hatil/module/auth/password_reset/data/model/forgot_password_request.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
@@ -10,6 +13,9 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
+  final ForgotPasswordController _forgotPasswordController =
+  ForgotPasswordController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,6 +85,19 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ),
             MaterialButton(
               onPressed: () {
+                FocusManager.instance.primaryFocus?.unfocus();
+                final ForgotPasswordRequest forgotPasswordRequest = ForgotPasswordRequest(_emailController.text);
+                final isForgotPassword = _forgotPasswordController
+                    .forgotPassword(forgotPasswordRequest);
+                if(isForgotPassword){
+
+                }
+                else{
+                  Fluttertoast.showToast(
+                    msg: "Invalid email!",
+                    toastLength: Toast.LENGTH_SHORT,
+                  );
+                }
               },
               minWidth: double.infinity,
               height: 50,
