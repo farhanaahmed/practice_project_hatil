@@ -17,7 +17,7 @@ class ForgotPasswordController {
 
   bool _isValid(ForgotPasswordRequest forgotPasswordRequest) {
     if(forgotPasswordRequest.email.isEmpty){
-      emailErrorMsgSubject.sink.add("Email can't be empty!");
+      emailErrorMsgSubject.sink.add("Email field can't be empty!");
       return false;
     }
     if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
