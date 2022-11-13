@@ -125,12 +125,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                         (route) => false,
                   );
-                }else{
-                  Fluttertoast.showToast(
-                    msg: "Invalid email or password!",
-                    toastLength: Toast.LENGTH_SHORT,
-                  );
-                }
+                 }
+    //            else{
+                //   Fluttertoast.showToast(
+                //     msg: "Invalid email or password!",
+                //     toastLength: Toast.LENGTH_SHORT,
+                //   );
+                // }
               },
               minWidth: double.infinity,
               height: 40,
