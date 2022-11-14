@@ -6,7 +6,7 @@ import 'package:practice_project_hatil/module/auth/login/controller/login_contro
 import 'package:practice_project_hatil/module/auth/login/data/model/login_request.dart';
 import 'package:practice_project_hatil/module/auth/password_reset/ui/forgot_password_screen.dart';
 import 'package:practice_project_hatil/module/auth/sign_up/ui/sign_up_screen.dart';
-import 'package:practice_project_hatil/module/home/home_screen.dart';
+import 'package:practice_project_hatil/module/home/ui/home_screen.dart';
 import 'package:practice_project_hatil/module/splash/splash_screen.dart';
 
 class LoginScreen extends StatefulWidget {

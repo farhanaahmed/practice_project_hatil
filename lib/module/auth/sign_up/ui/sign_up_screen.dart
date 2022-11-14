@@ -53,69 +53,87 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(
               height: 30,
             ),
-            TextField(
-              controller: _emailController,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: Colors.grey),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: Colors.grey),
-                ),
-                labelText: "Email",
-                labelStyle: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-                hintText: "Enter your email",
-              ),
+            StreamBuilder<String?>(
+              stream: _signUpController.emailErrorMsgSubject.stream,
+              builder: (context, snapshot) {
+                return TextField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    errorText: snapshot.data,
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Colors.grey),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Colors.grey),
+                    ),
+                    labelText: "Email",
+                    labelStyle: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    hintText: "Enter your email",
+                  ),
+                );
+              },
             ),
             SizedBox(
               height: 30,
             ),
-            TextField(
-              controller: _passwordController,
-              obscureText: true,
-              keyboardType: TextInputType.visiblePassword,
-              decoration: InputDecoration(
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: Colors.grey),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: Colors.grey),
-                ),
-                labelText: "Password",
-                labelStyle: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-                hintText: "Enter your password",
-              ),
+            StreamBuilder<String?>(
+              stream: _signUpController.passwordErrorMsgSubject.stream,
+              builder: (context, snapshot) {
+                return TextField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  keyboardType: TextInputType.visiblePassword,
+                  decoration: InputDecoration(
+                    errorText: snapshot.data,
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Colors.grey),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Colors.grey),
+                    ),
+                    labelText: "Password",
+                    labelStyle: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    hintText: "Enter your password",
+                  ),
+                );
+              },
             ),
             SizedBox(
               height: 30,
             ),
-            TextField(
-              controller: _phoneController,
-              keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: Colors.grey),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: Colors.grey),
-                ),
-                labelText: "Phone",
-                labelStyle: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-                hintText: "Enter your phone number",
-              ),
+            StreamBuilder<String?>(
+              stream: _signUpController.phoneErrorMsgSubject.stream,
+              builder: (context, snapshot) {
+                return TextField(
+                  controller: _phoneController,
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                    errorText: snapshot.data,
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Colors.grey),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Colors.grey),
+                    ),
+                    labelText: "Phone",
+                    labelStyle: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    hintText: "Enter your phone number",
+                  ),
+                );
+              },
             ),
             SizedBox(
               height: 30,
