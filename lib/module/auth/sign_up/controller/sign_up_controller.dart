@@ -24,6 +24,9 @@ class SignUpController {
       emailErrorMsgSubject.sink.add("Invalid email");
       returnValue = false;
     }
+    else{
+      emailErrorMsgSubject.sink.add(null);
+    }
     if(signUpRequest.password.isEmpty){
       passwordErrorMsgSubject.sink.add("Password field can not be empty");
       returnValue = false;
@@ -32,9 +35,15 @@ class SignUpController {
       passwordErrorMsgSubject.sink.add("Password length must be at least 8 characters");
       returnValue = false;
     }
+    else{
+      passwordErrorMsgSubject.sink.add(null);
+    }
     if(signUpRequest.phone.isEmpty){
       phoneErrorMsgSubject.sink.add("Phone number is required");
       returnValue = false;
+    }
+    else{
+      phoneErrorMsgSubject.sink.add(null);
     }
     return returnValue;
     // bool isEmailValid = signUpRequest.email.isNotEmpty &&
