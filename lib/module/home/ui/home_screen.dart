@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:practice_project_hatil/module/home/controller/home_controller.dart';
+import 'package:practice_project_hatil/module/home/data/model/discover_product_response.dart';
 import 'package:practice_project_hatil/module/home/ui/discover_single_product_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,6 +12,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  HomeController _homeController = HomeController();
+
+  @override
+  initState() {
+    super.initState();
+    _homeController.getDiscoverProduct();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,25 +40,40 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 30,
             ),
-            Container(
-              height: 200,
-              width: double.infinity,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (BuildContext context, int index){
-                  return  DiscoverSingleProduct('https://images.unsplash'
-                      '.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0'
-                      '.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8'
-                      '&auto=format&fit=crop&w=765&q=80', 'chair', '50');
+            StreamBuilder<DiscoverProductResponse?>(
+              stream: _homeController.discoverProductSubject.stream,
+              builder: (context, snapshot) {
+                if (snapshot.hasData && snapshot.data != null) {
+                  return _getDiscoverProductWidget(snapshot.data!.products);
+                } else {
+                  return Center(
+                    child: SizedBox(
+                      height: 50,
+                      width: 50,
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
                 }
-
-
-              ),
+              },
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _getDiscoverProductWidget(List<Product> discoverProductList) {
+    return Container(
+      height: 200,
+      width: double.infinity,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: discoverProductList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return DiscoverSingleProduct(
+              product: discoverProductList[index],
+            );
+          }),
     );
   }
 }
