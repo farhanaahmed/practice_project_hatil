@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_project_hatil/module/home/controller/home_controller.dart';
-import 'package:practice_project_hatil/module/home/data/model/discover_product_response.dart';
+import 'package:practice_project_hatil/module/home/data/model/product_response.dart';
 import 'package:practice_project_hatil/module/home/ui/discover_single_product_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 30,
             ),
-            StreamBuilder<DiscoverProductResponse?>(
+            StreamBuilder<ProductResponse?>(
               stream: _homeController.discoverProductSubject.stream,
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data != null) {
@@ -55,6 +55,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }
               },
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              "Trending",
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ],
         ),

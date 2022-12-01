@@ -1,17 +1,17 @@
 import 'dart:convert';
 
-DiscoverProductResponse discoverProductResponseFromJson(String str) => DiscoverProductResponse.fromJson(json.decode(str));
+ProductResponse discoverProductResponseFromJson(String str) => ProductResponse.fromJson(json.decode(str));
 
-String discoverProductResponseToJson(DiscoverProductResponse data) => json.encode(data.toJson());
+String discoverProductResponseToJson(ProductResponse data) => json.encode(data.toJson());
 
-class DiscoverProductResponse {
-  DiscoverProductResponse({
+class ProductResponse {
+  ProductResponse({
     this.products = const [],
   });
 
   List<Product> products;
 
-  factory DiscoverProductResponse.fromJson(Map<String, dynamic> json) => DiscoverProductResponse(
+  factory ProductResponse.fromJson(Map<String, dynamic> json) => ProductResponse(
     products: List<Product>.from(json["products"].map((x) => Product.fromJson(x))),
   );
 

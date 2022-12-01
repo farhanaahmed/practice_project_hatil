@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practice_project_hatil/module/home/data/model/discover_product_response.dart';
+import 'package:practice_project_hatil/module/home/data/model/product_response.dart';
 
 class DiscoverSingleProduct extends StatelessWidget {
   Product product;
