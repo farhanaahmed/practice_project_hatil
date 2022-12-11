@@ -8,10 +8,19 @@ class HomeController {
   BehaviorSubject<ProductResponse?> discoverProductSubject =
       BehaviorSubject<ProductResponse>();
 
-  void getDiscoverProduct() async{
-    ProductResponse discoverProductResponse = await _homeRepo
-        .getDiscoverProduct();
+  BehaviorSubject<ProductResponse?> trendingProductSubject =
+      BehaviorSubject<ProductResponse>();
+
+  void getDiscoverProduct() async {
+    ProductResponse discoverProductResponse =
+        await _homeRepo.getDiscoverProduct();
     discoverProductSubject.sink.add(discoverProductResponse);
+  }
+
+  void getTrendingProduct() async {
+    ProductResponse trendingProductResponse =
+        await _homeRepo.getTrendingProduct();
+    trendingProductSubject.sink.add(trendingProductResponse);
   }
 
 }

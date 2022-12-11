@@ -2,7 +2,13 @@ import 'dart:convert';
 
 ProductResponse discoverProductResponseFromJson(String str) => ProductResponse.fromJson(json.decode(str));
 
+// ProductResponse trendingProductResponseFromJson (String str) =>
+//     ProductResponse.fromJson(json.decode(str));
+
 String discoverProductResponseToJson(ProductResponse data) => json.encode(data.toJson());
+
+// String trendingProductResponseToJson(ProductResponse data) => json.encode
+//   (data.toJson());
 
 class ProductResponse {
   ProductResponse({
